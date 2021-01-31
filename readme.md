@@ -3,7 +3,7 @@
 
 ## Description 
 
-In this assignment we are asked to create a passowrd generator. When the site is visted; the user is prompted with a few questions to find the length and criterea of characters for their password. 
+In this assignment we are asked to create a weather app. When the site is visted; the user can type in the search area the city they would like to see the weather forcast of. The searched cities will be saved in the local storage.
 
 ---
 
@@ -12,13 +12,13 @@ In this assignment we are asked to create a passowrd generator. When the site is
 There should be no instillation involved. The link provided should take you straight to the webpage created on default web browser
 
 
-[I am a link to the web page](https://cheetboy159.github.io/passwordGenerator/)
+[I am a link to the web page](https://cheetboy159.github.io/weatherDashboard/)
 
 
 
 ## Usage 
 
-If you follow the provided link in the installation section, it will take straight to the site. Aswering the prompts will result in generating the desired passowrd. 
+If you follow the provided link in the installation section, it will take straight to the site.  
 
 ![](assets/weatherDashboard.JPG)
 
