@@ -1,69 +1,4 @@
-var cityInput = "";
-var url = "";
-var APIkey = "";
-var queryurl = "";
-var currenturl = "";
-var citiesDiv = document.getElementById("citiesInLocalStorage");
-init();
-buttonList();
-searchbtn();
-//check storage
-function init() {
-    var savedCities = JSON.parse(localStorage.getItem("cities"));
-    if (savedCities !== null) {
-        citiesArray = savedCities
-    }
-    renderButtons();
-}
-var citiesArray = [];
-//search history buttons
-function buttonList() {
-    $(".listbtn").on("click", function (event) {
-        event.preventDefault();
-        cityInput = $(this).text().trim();
-        APIcalls();
-    })
-}
-//sets localstorage cities array 
-function storeCities() {
-    localStorage.setItem("cities", JSON.stringify(citiesArray));
-}
-//main search bar
-function searchbtn() {
-    $("#searchButton").on("click", function (event) {
-        event.preventDefault();
-        cityInput = $(this).prev().val().trim()
-        //adds cities to array 
-        citiesArray.push(cityInput);
-        //cities array.length is less than 8 
-        if (citiesArray.length > 8) {
-            citiesArray.shift()
-        }
-        if (cityInput == "") {
-            return;
-        }
-        APIcalls();
-        storeCities();
-        renderButtons();
-    })
-}
-//render buttons
-function renderButtons() {
-    citiesDiv.innerHTML = "";
-    if (citiesArray == null) {
-        return;
-    }
-    var uniqueCities = [...new Set(citiesArray)];
-    for (var i = 0; i < uniqueCities.length; i++) {
-        var cityName = uniqueCities[i];
-        var buttonEl = document.createElement("button");
-        buttonEl.textContent = cityName;
-        buttonEl.setAttribute("class", "listbtn");
-        citiesDiv.appendChild(buttonEl);
-        buttonList();
-    }
-}
-//API calls
+
 function APIcalls() {
     url = "https://api.openweathermap.org/data/2.5/forecast?q=";
     currenturl = "https://api.openweathermap.org/data/2.5/weather?q=";
@@ -92,6 +27,7 @@ function APIcalls() {
         for (var i = 0; i < response.list.length; i++) {
             if (response.list[i].dt_txt.split(" ")[1] == "15:00:00") {
                 var day = response.list[i].dt_txt.split("-")[2].split(" ")[0];
+                console.log(day);
                 var month = response.list[i].dt_txt.split("-")[1];
                 var year = response.list[i].dt_txt.split("-")[0];
                 $("#" + "date" + dayNumber).text(month + "/" + day + "/" + year);

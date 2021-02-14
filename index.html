@@ -6,92 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Weather Dashboard</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="style.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/4439e3b362.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-    <header id="page_header">
-        <h1>Weather Dashboard</h1>
-    </header>
-
-    <div class="container-fluid row">
-        <div class="col-3 left_div justify-content-center pt-3">
-            <div class="search_div mb-4">
-                <h5 class="pt-2 pl-3">Search by city: </h5>
-                <form class="form-inline my-2 my-lg-0 mt-3 ml-3">
-                    <input class="form-control mr-sm-2 float-left" type="search" placeholder="Search" id="search_bar"
-                        aria-label="Search">
-                    <button id="searchButton" class="btn btn-outline-light my-2 my-sm-0" type="submit"><i
-                            class="fas fa-search"></i></button>
-                </form>
-            </div>
-            <h5 class="justify-content-center pt-2 pl-3">Your previously searched cities: </h5>
-            <div class="container my-3 col-12" id="citiesInLocalStorage">
-
-            </div>
-        </div>
-
-
-
-        <div class="todayWeather col-9 pt-3">
-            <div class="bg-light p-3">
-                <h2 class="justify-content-center text-dark" id="nameOfCity"></h2>
-                <div class="row">
-                    <div class="col-6">
-                        <p id="tempNow"></p>
-                        <p id="humidityNow"></p>
-                        <p id="windSpeedNow"></p>
-                        <img id="icon" src="">
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-light p-3 m-3 w-100">
-                <div class="bg-light">
-                    <h5 class="text-dark">Five Day Weather Forecast</h5>
-                </div>
-                <div class="row justify-content-center">
-                    <div id="1stDay" class="card-body mx-2 my-2">
-                        <h5 id="date0"></h5>
-                        <p id="fiveDayTemp0"></p>
-                        <p id="fiveDayHumidity0"></p>
-                        <img id="fiveDayIcon0" src="">
-                    </div>
-                    <div id="2ndDay" class="card-body mx-2 my-2">
-                        <h5 id="date1"></h5>
-                        <p id="fiveDayTemp1"></p>
-                        <p id="fiveDayHumidity1"></p>
-                        <img id="fiveDayIcon1" src="">
-                    </div>
-                    <div id="3rdDay" class="card-body mx-2 my-2">
-                        <h5 id="date2"></h5>
-                        <p id="fiveDayTemp2"></p>
-                        <p id="fiveDayHumidity2"></p>
-                        <img id="fiveDayIcon2" src="">
-                    </div>
-                    <div id="4thDay" class="card-body mx-2 my-2">
-                        <h5 id="date3"></h5>
-                        <p id="fiveDayTemp3"></p>
-                        <p id="fiveDayHumidity3"></p>
-                        <img id="fiveDayIcon3" src="">
-                    </div>
-                    <div id="5thDay" class="card-body mx-2 my-2">
-                        <h5 id="date4"></h5>
-                        <p id="fiveDayTemp4"></p>
-                        <p id="fiveDayHumidity4"></p>
-                        <img id="fiveDayIcon4" src="">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="script.js"></script>
