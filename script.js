@@ -30,29 +30,28 @@ function todaysWeather(){
     
 }
 function fiveDayWeather(){
-    fiveDayWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityid + "&appid=" + APIKey;
+    fiveDayWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + city + "&appid=" + APIKey;
     $.ajax({
         url:fiveDayWeatherURL,
         method:"GET"
     }).then(function(forcast){
         for (i = 0; i < 5; i++) {
             var forcastDate = new Date((forcast.list[((i + 1) * 8) - 1].dt) * 1000).toLocaleDateString();
-            var forcastIcon = forcast.list[((i + 1) * 8) - 1].weather[0].icon;
-            var forcastIconURL = "https://openweathermap.org/img/wn/" + iconcode + ".png";
+            var forcastIconRetreaval = forcast.list[((i + 1) * 8) - 1].weather[0].icon;
+            var forcastIconURL = "https://openweathermap.org/img/wn/" + forcastIconRetreaval + ".png";
             var forcastTempKalvin = forcast.list[((i + 1) * 8) - 1].main.temp;
-            var forcastTempFarangiht = (((tempK - 273.5) * 1.8) + 32).toFixed(2);
+            var forcastTempFarangiht = (((forcastTempKalvin - 273.5) * 1.8) + 32).toFixed(2);
             var forcastHumidity = forcast.list[((i + 1) * 8) - 1].main.humidity;
 
             var forcastWeather = `
-            <div class="weatherNow">
-                <p class="tempNow">${tempNow}</p>
-                <p class="humidityNow">${humidityNow}</p>
-                <p class="windSpeedNow">${windSpeedNow}</p>
-                <img class="iconNow"${iconNow}></div>;
-            `
-           
+            <div class="col-sm-2 bg-primary forecast text-white ml-2 mb-3 p-2 mt-2 rounded">
+                <p class="forcastDate">${forcastDate}</p>
+                <p class="forcastTemp">${forcastTempFarangiht}</p>
+                <p class="forcastHumidity">${forcastHumidity}</p>
+                <img class="forcastIcon"${forcastIconURL}></div>`;
+            $("#"+i).append(forcastWeather);
         }
     })
 }
 todaysWeather();
-
+fiveDayWeather();
