@@ -1,5 +1,5 @@
-var APIKey ="6b9b6924ca7bdd8131872c6e5a9fa3ec";
-var city = "East Brunswick";
+var APIKey = "6b9b6924ca7bdd8131872c6e5a9fa3ec";
+var city = "Monmouth Junction";
 var savedCity = [""];
 
 // var clearHistory = $("#clearHistory");
@@ -7,12 +7,12 @@ var savedCity = [""];
 var searchedCity = $("#searchCity");
 
 
-function todaysWeather(){
+function todaysWeather() {
     var todaysURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
     $.ajax({
-        url:todaysURL,
+        url: todaysURL,
         method: "GET",
-    }).then(function(response){
+    }).then(function (response) {
         var nameOfCity = "Today's Weather in " + city;
         var temp = Math.round(((response.main.temp - 273.15) * 9 / 5 + 32));
         var tempNow = "Temperature: " + temp + String.fromCharCode(176) + "F";
@@ -27,15 +27,15 @@ function todaysWeather(){
                 <img class="iconNow"${iconNow}></div>`;
         $("#currentWeather").append(todayWeather);
     })
-    
+
 }
-function fiveDayWeather(){
-    fiveDayWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + city + "&appid=" + APIKey;
+function fiveDayWeather() {
+    fiveDayWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey;
     $.ajax({
-        url:fiveDayWeatherURL,
-        method:"GET"
-    }).then(function(forcast){
-        for (i = 0; i < 5; i++) {
+        url: fiveDayWeatherURL,
+        method: "GET"
+    }).then(function (forcast) {
+        for (var i = 0; i < 5; i++) {
             var forcastDate = new Date((forcast.list[((i + 1) * 8) - 1].dt) * 1000).toLocaleDateString();
             var forcastIconRetreaval = forcast.list[((i + 1) * 8) - 1].weather[0].icon;
             var forcastIconURL = "https://openweathermap.org/img/wn/" + forcastIconRetreaval + ".png";
@@ -49,9 +49,10 @@ function fiveDayWeather(){
                 <p class="forcastTemp">${forcastTempFarangiht}</p>
                 <p class="forcastHumidity">${forcastHumidity}</p>
                 <img class="forcastIcon"${forcastIconURL}></div>`;
-            $("#"+i).append(forcastWeather);
+            $("#" + i).append(forcastWeather);
         }
     })
 }
+
 todaysWeather();
 fiveDayWeather();
