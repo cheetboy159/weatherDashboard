@@ -1,10 +1,24 @@
-var cityToSearch = "Monmouth Junction";
+var cityToSearch = "";
 var savedCity = [];
-
+// console.log(savedCity);
 // var clearHistory = $("#clearHistory");
-// var searchButton = $("#searchButton");
+var searchButton = $("#searchButton");
 var searchedCity = $("#searchCity");
+var searchCity = $("#searchCity");
 
+// adds click handler for the search button to run the function displayWeather
+$("#searchButton").on("click", displayWeather);
+// passes the input to cityToSearch in order to be passed to API searches
+function displayWeather(event) {
+    event.preventDefault();
+    if (searchCity.val().trim() !== "") {
+        cityToSearch = searchCity.val().trim();
+        console.log(cityToSearch);
+        todaysWeather(cityToSearch);
+        fiveDayWeather(cityToSearch);
+    }
+}
+displayWeather();
 // Function for current weather ajax call
 function todaysWeather() {
     var todaysURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityToSearch + "&appid=6b9b6924ca7bdd8131872c6e5a9fa3ec";
@@ -51,6 +65,3 @@ function fiveDayWeather() {
         }
     })
 }
-
-todaysWeather();
-fiveDayWeather();
