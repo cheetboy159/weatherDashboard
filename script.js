@@ -13,7 +13,6 @@ function displayWeather(event) {
     event.preventDefault();
     if (searchCity.val().trim() !== "") {
         cityToSearch = searchCity.val().trim();
-        console.log(cityToSearch);
         todaysWeather(cityToSearch);
         fiveDayWeather(cityToSearch);
     }
