@@ -1,4 +1,3 @@
-var cityToSearch = "";
 var savedCity = [];
 // console.log(savedCity);
 // var clearHistory = $("#clearHistory");
@@ -8,16 +7,17 @@ var searchCity = $("#searchCity");
 
 // adds click handler for the search button to run the function displayWeather
 $("#searchButton").on("click", displayWeather);
+var cityToSearch = "";
 // passes the input to cityToSearch in order to be passed to API searches
 function displayWeather(event) {
     event.preventDefault();
+    
     if (searchCity.val().trim() !== "") {
         cityToSearch = searchCity.val().trim();
         todaysWeather(cityToSearch);
         fiveDayWeather(cityToSearch);
     }
 }
-displayWeather();
 // Function for current weather ajax call
 function todaysWeather() {
     var todaysURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityToSearch + "&appid=6b9b6924ca7bdd8131872c6e5a9fa3ec";
@@ -37,7 +37,7 @@ function todaysWeather() {
                 <p class="humidityNow">${humidityNow}</p>
                 <p class="windSpeedNow">${windSpeedNow}</p>
                 <img class="iconNow"${iconNow}></div>`;
-        $("#currentWeather").append(todayWeather);
+        $("#currentWeather").html(todayWeather);
     })
 }
 // function for forcast weather ajax call
@@ -60,7 +60,14 @@ function fiveDayWeather() {
                 <p class="forcastTemp">Temp: ${forcastTempFarangiht}</p>
                 <p class="forcastHumidity">Humidity: ${forcastHumidity}</p>
                 <img src="${forcastIconURL}">`;
-            $("#" + i).append(forcastWeather);
+            $("#" + i).html(forcastWeather);
         }
     })
 }
+
+
+function saveCities() {
+    localStorage.setItem("savedCities", JSON.stringify(cityToSearch));
+    
+}
+saveCities();
