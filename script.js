@@ -7,7 +7,7 @@ var searchCity = $("#searchCity");
 
 
 // Function for current weather ajax call
-function todaysWeather() {
+function todaysWeather(cityToSearch) {
     var todaysURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityToSearch + "&appid=6b9b6924ca7bdd8131872c6e5a9fa3ec";
     $.ajax({
         url: todaysURL,
@@ -33,19 +33,19 @@ function todaysWeather() {
             );
             localStorage.setItem("savedCity", JSON.stringify(savedCity));
             console.log(savedCity);
-            addToList(cityToSearch);
+            loadlastCity(cityToSearch);
         }
         else {
             if (find(cityToSearch) > 0) {
                 savedCity.push(cityToSearch.toUpperCase());
                 localStorage.setItem("savedCity", JSON.stringify(savedCity));
-                addToList(cityToSearch);
+                loadlastCity(cityToSearch);
             }
         }
     })
 }
 // function for forcast weather ajax call
-function fiveDayWeather() {
+function fiveDayWeather(cityToSearch) {
     fiveDayWeatherURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityToSearch + "&appid=6b9b6924ca7bdd8131872c6e5a9fa3ec";
     $.ajax({
         url: fiveDayWeatherURL,
@@ -76,12 +76,17 @@ function addToList(city) {
     $("#listGroup").append(listEl);
 }
 function invokePastSearch(event) {
-    var liEl = event.target;
-    if (event.target.matches("li")) {
-        city = liEl.textContent.trim();
-        currentWeather(city);
+    var liEl = $(this);
+    window.listItemDebug=liEl;
+    // console.log(liEl);
+    // if (event.target.matches("li")) {
+        // city = liEl.getAtribute("data-value").trim();
+    city = liEl.attr("data-value");
+    console.log(city);
+        todaysWeather(city);
         fiveDayWeather(city)
-    }
+        
+    // }
 
 }
 function loadlastCity() {
@@ -94,7 +99,7 @@ function loadlastCity() {
             addToList(savedCity[i]);
         }
         city = savedCity[i - 1];
-        currentWeather(cityToSearch);
+        todaysWeather(cityToSearch);
     }
 
 }
@@ -107,10 +112,15 @@ function find(c) {
     return 1;
 }
 $(window).on("load", loadlastCity);
-$(document).on("click", invokePastSearch);
+$(document).on("click","li", invokePastSearch);
 $("#searchButton").on("click", displayWeather);
 // adds click handler for the search button to run the function displayWeather
-$("#searchButton").on("click", displayWeather);
+$("#clearHistory").on("click", clearHistory);
+function clearHistory(){
+    savedCity=[];
+    localStorage.setItem("savedCity", JSON.stringify(savedCity));
+    $("#listGroup").empty();
+}
 var cityToSearch = "";
 // passes the input to cityToSearch in order to be passed to API searches
 function displayWeather(event) {
