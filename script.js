@@ -4,8 +4,6 @@ var savedCity = [];
 var searchButton = $("#searchButton");
 var searchedCity = $("#searchCity");
 var searchCity = $("#searchCity");
-
-
 // Function for current weather ajax call
 function todaysWeather(cityToSearch) {
     var todaysURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityToSearch + "&appid=6b9b6924ca7bdd8131872c6e5a9fa3ec";
@@ -68,30 +66,25 @@ function fiveDayWeather(cityToSearch) {
         }
     })
 }
-
+// function for adding searched city to list
 function addToList(city) {
     var listEl = $("<li>" + city.toUpperCase() + "</li>");
     $(listEl).attr("class", "list-group-item");
     $(listEl).attr("data-value", city.toUpperCase());
     $("#listGroup").append(listEl);
 }
-function invokePastSearch(event) {
+// function to retrive the list value of searched cities
+function invokePastSearch() {
     var liEl = $(this);
     window.listItemDebug=liEl;
-    // console.log(liEl);
-    // if (event.target.matches("li")) {
-        // city = liEl.getAtribute("data-value").trim();
     city = liEl.attr("data-value");
     console.log(city);
         todaysWeather(city);
-        fiveDayWeather(city)
-        
-    // }
-
+        fiveDayWeather(city);
 }
+// function to load city from localStorage
 function loadlastCity() {
     $("ul").empty();
-
     var savedCity = JSON.parse(localStorage.getItem("savedCity"));
     if (savedCity !== null) {
         savedCity = JSON.parse(localStorage.getItem("savedCity"));
@@ -101,7 +94,6 @@ function loadlastCity() {
         city = savedCity[i - 1];
         todaysWeather(cityToSearch);
     }
-
 }
 function find(c) {
     for (var i = 0; i < savedCity.length; i++) {
@@ -111,21 +103,21 @@ function find(c) {
     }
     return 1;
 }
-$(window).on("load", loadlastCity);
-$(document).on("click","li", invokePastSearch);
-$("#searchButton").on("click", displayWeather);
-// adds click handler for the search button to run the function displayWeather
-$("#clearHistory").on("click", clearHistory);
+// function to empty loacalStorage
 function clearHistory(){
     savedCity=[];
     localStorage.setItem("savedCity", JSON.stringify(savedCity));
     $("#listGroup").empty();
 }
+// event handlers
+$(window).on("load", loadlastCity);
+$(document).on("click","li", invokePastSearch);
+$("#searchButton").on("click", displayWeather);
+$("#clearHistory").on("click", clearHistory);
 var cityToSearch = "";
-// passes the input to cityToSearch in order to be passed to API searches
+// function to show weather
 function displayWeather(event) {
     event.preventDefault();
-    
     if (searchCity.val().trim() !== "") {
         cityToSearch = searchCity.val().trim();
         todaysWeather(cityToSearch);
