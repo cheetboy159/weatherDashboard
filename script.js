@@ -68,16 +68,16 @@ function fiveDayWeather(cityToSearch) {
 }
 // function for adding searched city to list
 function addToList(city) {
-    var listEl = $("<li>" + city.toUpperCase() + "</li>");
-    $(listEl).attr("class", "list-group-item");
-    $(listEl).attr("data-value", city.toUpperCase());
-    $("#listGroup").append(listEl);
+    var listElement = $("<li>" + city.toUpperCase() + "</li>");
+    $(listElement).attr("class", "list-group-item");
+    $(listElement).attr("data-value", city.toUpperCase());
+    $("#listGroup").append(listElement);
 }
 // function to retrive the list value of searched cities
 function invokePastSearch() {
-    var liEl = $(this);
-    window.listItemDebug=liEl;
-    city = liEl.attr("data-value");
+    var liElement = $(this);
+    window.listItemDebug = liElement;
+    city = liElement.attr("data-value");
     console.log(city);
         todaysWeather(city);
         fiveDayWeather(city);
@@ -95,9 +95,9 @@ function loadlastCity() {
         todaysWeather(cityToSearch);
     }
 }
-function find(c) {
+function find(a) {
     for (var i = 0; i < savedCity.length; i++) {
-        if (c.toUpperCase() === savedCity[i]) {
+        if (a.toUpperCase() === savedCity[i]) {
             return -1;
         }
     }
