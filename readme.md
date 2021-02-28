@@ -10,7 +10,7 @@ In this assignment we are asked to creat a weather dashboard that takes in the u
 
 This is first look at what the app looks like
 
-![day planner demo](./assets/weatherDashboard)
+![Weather Dashboard](./assets/weatherDashboard.JPG)
 
 [I am a link to the web page](https://cheetboy159.github.io/weatherDashboard/)
 
